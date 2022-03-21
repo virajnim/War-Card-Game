@@ -25,6 +25,25 @@ def createDeck():
     #print("\n Player 1 Deck:", p1_cards)
     return p1_cards, p2_cards
 
+def num_to_card(p1_card, p2_card):
+    numdict = {
+        1: "2",
+        2: "3",
+        3: "4",
+        4: "5",
+        5: "6",
+        6: "7",
+        7: "8",
+        8: "9",
+        9: "10",
+        10: "Jack",
+        11: "Queen",
+        12: "King",
+        13: "Ace",
+    }
+    p1_str = numdict[p1_card[0]] + " of " + p1_card[1]
+    p2_str = numdict[p2_card[0]] + " of " + p2_card[1]
+    print("{:40}{:40}".format(p1_str, p2_str), end='')
 
 def intro():
     print("Hello, welcome to the game of war! Press 0 to read the game rules or press 1 to start the game")
@@ -41,10 +60,46 @@ def intro():
 
 
 def play_war(p1, p2):
+    
     intro()
     print("game has started here")
-    #THIS IS WHERE YOU ENDED LAST NIGHT. THE IDEA I HAD WAS TO HAVE A WHILE LOOP UNTIL ONE OF THE DECKS IS EMPTY. THE WHILE LOOP WILL CONTAIN 3 IF/ELIF STATEMENTS THAT WILL HANDLE THE COMPARISON OF THE CARDS.
-    
+    print("{:40}{:40}".format("Player 1", "Player 2"), 'Result.\n', sep='')
+    count = 1
+    p1_4cards = []
+    p2_4cards = []
+
+    while len(p1) > 1 and len(p2) >1:
+
+        p1_card = p1.pop(0)
+        p2_card = p2.pop(0)
+        #print(p1_card, p2_card)
+        #print(len(p1), " ", len(p2))
+        num_to_card(p1_card, p2_card)
+        if p2_card[0] == p1_card[0]:
+            p1_4cards.extend([p1_card] + p1[0:4])
+            del p1[0:4]
+
+            p2_4cards.extend([p2_card] + p2[0:4])
+            del p2[0:4]
+            print("Tie.\n")
+        elif p1_card[0] > p2_card[0]:
+            #p1.extend([p1_card, p2_card, p1_4cards, p2_4cards])
+            p1 = p1 + [p1_card] + [p2_card] + p2_4cards + p1_4cards
+            p1_4cards = []
+            p2_4cards = []
+            print("Player 1 takes the cards.\n")
+            
+        
+        elif p2_card[0] > p1_card[0]:
+            #p2.extend([p2_card, p1_card, p1_4cards, p2_4cards])
+            p2 = p2 + [p1_card] + [p2_card] + p2_4cards + p1_4cards
+            p1_4cards = []
+            p2_4cards = []
+            print("Player 2 takes the cards.\n")
+        count += 1
+       
+
+
 
 
 
