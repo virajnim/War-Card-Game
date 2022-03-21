@@ -58,6 +58,17 @@ def intro():
         print("Invalid option")
         intro()
 
+def winner(p1,p2):
+    if len(p2) == 0:
+            if len(p1) == 0:
+                print('\nThe war ended in a tie.')
+            else:
+                print('\nPlayer 1 wins the war.')
+    else:
+            print('\nPlayer 2 wins the war.')
+ 
+    return True
+
 
 def play_war(p1, p2):
     
@@ -68,8 +79,11 @@ def play_war(p1, p2):
     p1_4cards = []
     p2_4cards = []
 
-    while len(p1) > 1 and len(p2) >1:
+    while len(p1) >=0 and len(p2) >=0:
 
+        if len(p1) <= 0 or len(p2) <= 0:
+            return winner(p1,p2)
+ 
         p1_card = p1.pop(0)
         p2_card = p2.pop(0)
         #print(p1_card, p2_card)
@@ -96,9 +110,10 @@ def play_war(p1, p2):
             p1_4cards = []
             p2_4cards = []
             print("Player 2 takes the cards.\n")
+            if len(p1) <= 0 or len(p2) <= 0:
+                return winner(p1,p2)
         count += 1
-       
-
+    return True
 
 
 
