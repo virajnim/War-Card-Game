@@ -83,7 +83,6 @@ def winner(p1,p2):
 def play_war(p1, p2):
     
     intro()
-    print("game has started here")
     print("{:40}{:40}".format("Player 1", "Player 2"), 'Result.\n', sep='')
     p1_4cards = []
     p2_4cards = []
